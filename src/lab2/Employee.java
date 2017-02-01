@@ -35,25 +35,33 @@ public class Employee {
         this.lastName = lastName;
         this.ssn = ssn;
     }
-
+    
+    public void orientationTour(String cubeId){
+        meetWithHrForBenefitAndSalryInfo();
+        meetDepartmentStaff();
+        reviewDeptPolicies();
+        moveIntoCubicle(cubeId);
+    }
+    
+    public String getFormattedDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy");
+        return sdf.format(orientationDate);
+    }
+    
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
     private void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Hr on "
-            + fmtDate);
+            + getFormattedDate());
     }
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.:
     private void meetDepartmentStaff() {
         metDeptStaff = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Dept. Staff on "
-            + fmtDate);
+            + getFormattedDate());
     }
 
     // Assume this must be performed third. And assume that because department
@@ -61,22 +69,21 @@ public class Employee {
     // independently from other classes.
     public void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " reviewed Dept policies on "
-            + fmtDate);
+            + getFormattedDate());
     }
 
     // Assume this must be performed 4th. And assume that because employees
     // sometimes change office locations that this method may need to be called 
     // independently from other classes.
     public void moveIntoCubicle(String cubeId) {
+        if(cubeId == null || cubeId.isEmpty()){
+            System.out.println("error");
+        }
         this.cubeId = cubeId;
-        this.movedIn = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
+        this.movedIn = true;       
         System.out.println(firstName + " " + lastName + " moved into cubicle "
-                + cubeId + " on " + fmtDate);
+                + cubeId + " on " + getFormattedDate());
     }
 
     public String getFirstName() {
@@ -87,10 +94,12 @@ public class Employee {
     // allowed through validation.
     
     public void setFirstName(String firstName) {
-       if(firstName == null || firstName.length() < 2){
-           return;
-       }
-        this.firstName = firstName;
+       if(firstName == null || firstName.isEmpty()){
+           
+        }
+       else {
+           this.firstName = firstName;
+        }
     }
 
     public String getLastName() {
@@ -98,10 +107,12 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        if(lastName == null || lastName.length() < 2){
-            return;
+        if(lastName == null || lastName.isEmpty()){
+            
         }
-       this.lastName = lastName;
+        else {
+            this.lastName = lastName;
+        }
     }
 
     public String getSsn() {
@@ -110,9 +121,11 @@ public class Employee {
 
     public void setSsn(String ssn) {
         if(ssn == null){
-            return;     
+            
         }
-        this.ssn = ssn;
+        else {
+            this.ssn = ssn;
+        }
     }
 
     public boolean isMetWithHr() {
@@ -155,9 +168,11 @@ public class Employee {
     
     public void setCubeId(String cubeId) {
         if(cubeId == null || cubeId.isEmpty()){
-            return;
+            
         }
-        this.cubeId = cubeId;
+        else {
+            this.cubeId = cubeId;
+        }
     }
 
     public Date getOrientationDate() {
@@ -166,7 +181,10 @@ public class Employee {
 
     public void setOrientationDate(Date orientationDate) {
         if(orientationDate == null){
-            return;
+            
         }
-        this.orientationDate = orientationDate;
-    }}
+        else {
+            this.orientationDate = orientationDate;
+        }
+    }
+}
